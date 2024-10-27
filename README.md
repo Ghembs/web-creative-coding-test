@@ -1,2 +1,2 @@
 # web-creative-coding-test
-test repository for experimenting with visual coding on web
+test repository for experimenting with coding visual effects for web
