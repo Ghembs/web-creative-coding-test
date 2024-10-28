@@ -76,8 +76,6 @@ class DotDrawer {
     context.restore();
   }
 
-
-
   update (width, height) {
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;
