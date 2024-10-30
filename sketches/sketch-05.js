@@ -5,7 +5,7 @@ const settings = {
   dimensions: [ 1080, 1080 ],
   playbackRate: "throttle",
   fps: 5,
-  animate: true,
+  //animate: true,
 };
 
 let text = "RESINA";
@@ -96,34 +96,29 @@ const sketch = ({ context, width, height }) => {
   };
 };
 
-// const onKeyUp = (e) => {
-//   text = e.key.toUpperCase();
-//   manager.render();
-// }
+const onKeyUp = (e) => {
+  text = e.key.toUpperCase();
+  manager.render();
+}
 
 const getGlyph = (val) => {
-  if (val < 50) return "";
-  if (val < 100) return ".";
-  if (val < 150) return "-";
-  if (val < 200) return "*";
+  // if (val < 50) return "";
+  // if (val < 100) return ".";
+  // if (val < 150) return "-";
+  // if (val < 200) return "*";
 
-  const glyphs = "_= /{}[()]%£&!?".split("");
+  const glyphs = ".-*_= /{}[()]%£&!?".split("");
   glyphs.push("Resina")
 
   //return text;
-  return random.pick(glyphs);
+  return val > 50? random.pick(glyphs): "";
 }
 
-//document.addEventListener("keyup", onKeyUp);
+document.addEventListener("keyup", onKeyUp);
 
 async function start() {
-  //text = "A";
-
   manager = await canvasSketch(sketch, settings);
 }
 //canvasSketch(sketch, settings);
 
-
-start().then(() =>{
-  console.log(text[indice]);
-});
+start();
