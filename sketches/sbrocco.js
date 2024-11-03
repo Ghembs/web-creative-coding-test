@@ -3,21 +3,27 @@ const random = require("canvas-sketch-util/random");
 const math = require("canvas-sketch-util/math");
 const tweakpane = require("tweakpane");
 
+const params = {
+  // CERCHIO
+  numsSlices: 40,
+  lineCap: "butt",
+  drawCircle: true,
+  // PAROLA
+  cell: 20,
+  fontsize: 0.6,
+  drawLetters: true,
+  // GENERALI
+  "Colore di sfondo": {r: 0, g: 0, b: 0, a: 1},
+  "Colore del tratto": {r: 255, g: 255, b: 255, a: 1},
+  "Schermo intero": false
+}
+
 const settings = {
   dimensions: [ 1080, 1080 ],
   animate: true,
   playbackRate: "throttle",
   fps: 24,
 };
-
-const params = {
-  numsSlices: 40,
-  lineCap: "butt",
-  cell: 20,
-  fontsize: 0.6,
-  drawLetters: true,
-  drawCircle: true,
-}
 
 let sticks = [];
 let arcs = [];
@@ -30,12 +36,14 @@ let manager;
 
 const sketch = ({ context, width, height }) => {
   let num = 0;
-  return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+  return ({context, width, height}) => {
+    if (params["Schermo intero"]) delete settings.dimensions;
+    context.fillStyle = `rgb(${params["Colore di sfondo"].r}, ${params["Colore di sfondo"].g}, 
+    ${params["Colore di sfondo"].b}, ${params["Colore di sfondo"].a})`;
     context.fillRect(0, 0, width, height);
     context.lineCap = params.lineCap;
 
-    if (params.drawCircle){
+    if (params.drawCircle) {
       const circleDrawer = new CircleDrawer(width, height);
       if (num !== params.numsSlices) {
         num = params.numsSlices;
@@ -45,14 +53,14 @@ const sketch = ({ context, width, height }) => {
       circleDrawer.drawCircle(context, height);
     }
 
-    if (params.drawLetters){
+    if (params.drawLetters) {
       const letterDrawer = new LetterDrawer(width, height, params.cell, params.fontsize);
       letterDrawer.draw(context);
     }
 
     indice++;
     indice %= text.length;
-  };
+    }
 };
 
 async function start() {
@@ -67,18 +75,22 @@ const createPane = () => {
 
   let tabs = pane.addTab({
     pages: [
+      {title : "Generali"},
       {title : "Cerchio"},
       {title: "Lettere"}
     ]
   });
+  tabs.pages[0].addInput(params, "Colore di sfondo");
+  tabs.pages[0].addInput(params, "Colore del tratto");
+  tabs.pages[0].addInput(params, "Schermo intero");
 
-  tabs.pages[0].addInput(params, "lineCap", {options: {butt: "butt", round: "round", square: "square"}});
-  tabs.pages[0].addInput(params, "numsSlices", {min: 20, max: 100, step: 1});
-  tabs.pages[0].addInput(params, "drawCircle");
+  tabs.pages[1].addInput(params, "lineCap", {options: {butt: "butt", round: "round", square: "square"}});
+  tabs.pages[1].addInput(params, "numsSlices", {min: 20, max: 100, step: 1});
+  tabs.pages[1].addInput(params, "drawCircle");
 
-  tabs.pages[1].addInput(params, "cell", {min: 10, max: 50, step: 1});
-  tabs.pages[1].addInput(params, "fontsize", {min: 0.3, max: 0.8, step: 0.1});
-  tabs.pages[1].addInput(params, "drawLetters");
+  tabs.pages[2].addInput(params, "cell", {min: 10, max: 50, step: 1});
+  tabs.pages[2].addInput(params, "fontsize", {min: 0.3, max: 0.8, step: 0.1});
+  tabs.pages[2].addInput(params, "drawLetters");
 }
 
 createPane();
@@ -125,7 +137,8 @@ class LetterDrawer {
 
     const typeData = this.typeContext.getImageData(0, 0, this.cols, this.rows).data;
 
-    context.fillStyle = 'black';
+    context.fillStyle = `rgba(${params["Colore del tratto"].r}, ${params["Colore del tratto"].g}, 
+    ${params["Colore del tratto"].b}, ${params["Colore del tratto"].a})`;
     for (let i = 0; i < this.numCells; i++) {
       const col = i % this.cols;
       const row = Math.floor(i / this.cols);
@@ -196,8 +209,11 @@ class CircleDrawer {
     for (let i = 0; i < params.numsSlices; i++) {
       let stick = sticks[i];
       let arc = arcs[i];
-      context.fillStyle = 'black';
+      context.fillStyle = `rgb(${params["Colore del tratto"].r}, ${params["Colore del tratto"].g}, 
+      ${params["Colore del tratto"].b}, ${params["Colore del tratto"].a})`;
       stick.draw(context, this.w, this.h);
+      context.strokeStyle = `rgb(${params["Colore del tratto"].r}, ${params["Colore del tratto"].g}, 
+      ${params["Colore del tratto"].b}, ${params["Colore del tratto"].a})`;
       arc.draw(context, this.radius, this.slice);
       stick.update(height);
       arc.update();
