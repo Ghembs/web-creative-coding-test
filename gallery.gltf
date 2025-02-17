@@ -3,9 +3,6 @@
 		"generator":"Khronos glTF Blender I/O v4.3.47",
 		"version":"2.0"
 	},
-	"extensionsUsed":[
-		"KHR_materials_emissive_strength"
-	],
 	"scene":0,
 	"scenes":[
 		{
@@ -78,65 +75,6 @@
 			]
 		}
 	],
-	"materials":[
-		{
-			"doubleSided":true,
-			"emissiveFactor":[
-				1,
-				1,
-				1
-			],
-			"extensions":{
-				"KHR_materials_emissive_strength":{
-					"emissiveStrength":1.6999999284744263
-				}
-			},
-			"name":"Galleria",
-			"pbrMetallicRoughness":{
-				"baseColorFactor":[
-					0.800000011920929,
-					0.800000011920929,
-					0.800000011920929,
-					1
-				],
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Acidi",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
-				"metallicFactor":0.6241829991340637,
-				"roughnessFactor":0.379084974527359
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Orchestra",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":1
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		},
-		{
-			"doubleSided":true,
-			"name":"Material.001",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":2
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.5
-			}
-		}
-	],
 	"meshes":[
 		{
 			"name":"Circle.001",
@@ -147,8 +85,7 @@
 						"NORMAL":1,
 						"TEXCOORD_0":2
 					},
-					"indices":3,
-					"material":0
+					"indices":3
 				}
 			]
 		},
@@ -161,8 +98,7 @@
 						"NORMAL":5,
 						"TEXCOORD_0":6
 					},
-					"indices":7,
-					"material":1
+					"indices":7
 				}
 			]
 		},
@@ -175,8 +111,7 @@
 						"NORMAL":9,
 						"TEXCOORD_0":10
 					},
-					"indices":7,
-					"material":2
+					"indices":7
 				}
 			]
 		},
@@ -189,41 +124,9 @@
 						"NORMAL":12,
 						"TEXCOORD_0":13
 					},
-					"indices":7,
-					"material":3
+					"indices":7
 				}
 			]
-		}
-	],
-	"textures":[
-		{
-			"sampler":0,
-			"source":0
-		},
-		{
-			"sampler":1,
-			"source":1
-		},
-		{
-			"sampler":1,
-			"source":2
-		}
-	],
-	"images":[
-		{
-			"mimeType":"image/jpeg",
-			"name":"Insidia",
-			"uri":"Insidia.jpg"
-		},
-		{
-			"mimeType":"image/jpeg",
-			"name":"Orchestra",
-			"uri":"Orchestra.jpg"
-		},
-		{
-			"mimeType":"image/jpeg",
-			"name":"Tradimento",
-			"uri":"Tradimento.jpg"
 		}
 	],
 	"accessors":[
@@ -436,18 +339,6 @@
 			"byteLength":192,
 			"byteOffset":13564,
 			"target":34962
-		}
-	],
-	"samplers":[
-		{
-			"magFilter":9729,
-			"minFilter":9987,
-			"wrapS":33071,
-			"wrapT":33071
-		},
-		{
-			"magFilter":9729,
-			"minFilter":9987
 		}
 	],
 	"buffers":[
